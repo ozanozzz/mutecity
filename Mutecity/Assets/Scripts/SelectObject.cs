@@ -3,16 +3,17 @@ using UnityEngine;
 public class SelectObject : MonoBehaviour
 {
     [SerializeField] private Camera mainCamera;
-    [SerializeField] private GameObject SelectedObject;
-    [SerializeField] private Material highlightMaterial; // Add a material for highlighting
-    private Material originalMaterial; // Store the original material here
-    private Vector3 groundPoint; // Store the point on the ground where the object will move
+    [SerializeField] private Material highlightMaterial; // Material for highlighting
+
+    private GameObject SelectedObject; // Currently selected object
+    private Material originalMaterial; // Original material of the selected object
+    private Vector3 groundPoint; // Point on the ground where the object will move
     private RaycastHit hit;
-    public float step = 10f;
-    public bool ObjMoving = false;
+    private bool ObjMoving = false; // Indicates if the object is moving
+    public float step = 1f;
     public float distanceToGround;
 
-    [SerializeField] private LayerMask entityLayer; // Layer mask to include only the Entity layer for selection
+    [SerializeField] private LayerMask entityLayer; // Layer mask for selecting objects
 
     void Update()
     {
@@ -20,7 +21,7 @@ public class SelectObject : MonoBehaviour
         {
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, entityLayer)) // Raycast using the entity layer mask
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, entityLayer))
             {
                 if (SelectedObject == hit.collider.gameObject)
                 {
@@ -33,9 +34,13 @@ public class SelectObject : MonoBehaviour
                     ObjMoving = true;
                 }
             }
+            else if(ObjMoving)
+            {
+                groundPoint = CalculateGroundPoint(); // Calculate ground point when clicked
+            }
         }
 
-        if (ObjMoving && Input.GetMouseButton(0)) // i just want to click once and object must move to the desired point, no matter if i hold it or not
+        if (ObjMoving)
         {
             MoveObject();
         }
@@ -60,9 +65,9 @@ public class SelectObject : MonoBehaviour
 
     private void Deselect()
     {
-        // Reset the object's material to the original material
         if (SelectedObject != null)
         {
+            // Reset the object's material to the original material
             SelectedObject.GetComponent<Renderer>().material = originalMaterial;
             SelectedObject = null;
         }
@@ -74,19 +79,26 @@ public class SelectObject : MonoBehaviour
         obj.GetComponent<Renderer>().material = highlightMaterial;
     }
 
-    private void MoveObject()
+    private Vector3 CalculateGroundPoint()
     {
-        Ray groundRay = mainCamera.ScreenPointToRay(Input.mousePosition); // Cast a ray from the camera to the mouse position
-        Plane groundPlane = new Plane(Vector3.up, Vector3.zero); // Define an invisible plane at Y=0
+        Ray groundRay = mainCamera.ScreenPointToRay(Input.mousePosition); // Ray from camera to mouse position
+        Plane groundPlane = new Plane(Vector3.up, Vector3.zero); // Invisible plane at Y=0
         float rayDistance;
 
-        if (groundPlane.Raycast(groundRay, out rayDistance)) // Cast a ray towards the plane
+        if (groundPlane.Raycast(groundRay, out rayDistance))
         {
-            groundPoint = groundRay.GetPoint(rayDistance); // Update ground point when mouse is clicked
+            return groundRay.GetPoint(rayDistance); // Point on the plane where the ray hits
+        }
 
+        return Vector3.zero; // Return zero vector if ray does not hit the plane
+    }
+
+    private void MoveObject()
+    {
+        if (groundPoint != Vector3.zero)
+        {
             // Calculate the distance from the current position to the ground point
             distanceToGround = Vector3.Distance(SelectedObject.transform.position, groundPoint);
-
             // Move the object towards the ground point
             SelectedObject.transform.position = Vector3.MoveTowards(SelectedObject.transform.position, groundPoint, distanceToGround * step * Time.deltaTime);
         }

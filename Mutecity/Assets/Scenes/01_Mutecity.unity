@@ -296,10 +296,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 1687258584}
-  SelectedObject: {fileID: 0}
   highlightMaterial: {fileID: 2100000, guid: 7c30e250fa057764fba796985eb3904f, type: 2}
-  step: 10
-  ObjMoving: 0
+  step: 1
   distanceToGround: 0
   entityLayer:
     serializedVersion: 2

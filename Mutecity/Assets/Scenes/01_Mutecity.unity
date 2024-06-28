@@ -185,6 +185,8 @@ GameObject:
   - component: {fileID: 717511101}
   - component: {fileID: 717511106}
   - component: {fileID: 717511105}
+  - component: {fileID: 717511108}
+  - component: {fileID: 717511107}
   m_Layer: 6
   m_Name: Cube
   m_TagString: Untagged
@@ -280,10 +282,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ea7f6313812c544a81de889f1cddcb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: {fileID: 0}
+  Event: {fileID: 11400000, guid: a178724be6fad8a4f877fe4b8b939018, type: 2}
   Response:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 717511106}
+        m_TargetAssemblyTypeName: ObjectHighlighter, Assembly-CSharp
+        m_MethodName: Highlight
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &717511106
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -296,7 +310,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e02fb470884632d4bba0948144b7ade4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  highlightMaterial: {fileID: 0}
+  highlightMaterial: {fileID: 2100000, guid: 7c30e250fa057764fba796985eb3904f, type: 2}
+--- !u!114 &717511107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 717511100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df56f35d509d55f4491528512745a0cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCamera: {fileID: 1687258584}
+  selectedObject: {fileID: 717511100}
+  step: 1
+--- !u!114 &717511108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 717511100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ea7f6313812c544a81de889f1cddcb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: c979b55c434ec444996ccea2645f6960, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 717511106}
+        m_TargetAssemblyTypeName: ObjectHighlighter, Assembly-CSharp
+        m_MethodName: RemoveHighlight
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &973489068
 GameObject:
   m_ObjectHideFlags: 0
@@ -329,9 +386,9 @@ MonoBehaviour:
   mainCamera: {fileID: 1687258584}
   entityLayer:
     serializedVersion: 2
-    m_Bits: 0
-  onSelectEvent: {fileID: 0}
-  onDeselectEvent: {fileID: 0}
+    m_Bits: 64
+  onSelectEvent: {fileID: 11400000, guid: a178724be6fad8a4f877fe4b8b939018, type: 2}
+  onDeselectEvent: {fileID: 11400000, guid: c979b55c434ec444996ccea2645f6960, type: 2}
 --- !u!4 &973489070
 Transform:
   m_ObjectHideFlags: 0

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ObjectHighlighter : MonoBehaviour
+public class ObjectSelector : MonoBehaviour
 {
     [SerializeField] private Material highlightMaterial;
     private Material originalMaterial;
@@ -12,12 +12,12 @@ public class ObjectHighlighter : MonoBehaviour
         originalMaterial = objectRenderer.material;
     }
 
-    public void Highlight()
+    public void Select()
     {
         objectRenderer.material = highlightMaterial;
     }
 
-    public void RemoveHighlight()
+    public void Deselect()
     {
         objectRenderer.material = originalMaterial;
     }

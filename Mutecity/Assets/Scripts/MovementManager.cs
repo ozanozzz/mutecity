@@ -4,20 +4,22 @@ public class MovementManager : MonoBehaviour
 {
     [SerializeField] private Camera mainCamera;
     [SerializeField] private GameObject selectedObject;
-    [SerializeField] private float step = 1f;
-    private Vector3 targetPosition;
+    private LayerMask entityLayer;
+    public Vector3 targetPosition;
+    [SerializeField] private TargetEvent onTargetEvent;
+    private Ray groundRay;
+    
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(1)) // Right click to set the target position
+        if (Input.GetMouseButtonDown(0))
         {
+            if(!Physics.Raycast(groundRay, out RaycastHit hit, Mathf.Infinity, entityLayer))
+            {
             targetPosition = CalculateGroundPoint();
+            }
         }
 
-        if (selectedObject != null)
-        {
-            MoveObject();
-        }
     }
 
     private Vector3 CalculateGroundPoint()
@@ -33,13 +35,9 @@ public class MovementManager : MonoBehaviour
 
         return Vector3.zero;
     }
-
-    private void MoveObject()
+     private void RaiseTarget(Vector3 target )
     {
-        if (targetPosition != Vector3.zero)
-        {
-            float distanceToGround = Vector3.Distance(selectedObject.transform.position, targetPosition);
-            selectedObject.transform.position = Vector3.MoveTowards(selectedObject.transform.position, targetPosition, distanceToGround * step * Time.deltaTime);
-        }
+        onTargetEvent.Raise(target); // Raise the trigger move event
     }
+
 }

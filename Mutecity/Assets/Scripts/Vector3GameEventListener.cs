@@ -1,10 +1,10 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class TargetEventListener : MonoBehaviour
+public class Vector3GameEventListener : MonoBehaviour
 {
     [Tooltip("Event to register with.")]
-    public TargetEvent Event;
+    public Vector3GameEvent Event;
 
     [Tooltip("Response to invoke when Event is raised.")]
     public UnityEvent<Vector3> Response;
@@ -25,8 +25,8 @@ public class TargetEventListener : MonoBehaviour
         }
     }
 
-    public void OnEventRaised(Vector3 target)
+    public void OnEventRaised(Vector3 value)
     {
-        Response.Invoke(target);
+        Response.Invoke(value);
     }
 }

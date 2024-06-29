@@ -3,23 +3,21 @@ using UnityEngine;
 public class MovementManager : MonoBehaviour
 {
     [SerializeField] private Camera mainCamera;
-    [SerializeField] private GameObject selectedObject;
     private LayerMask entityLayer;
     public Vector3 targetPosition;
-    [SerializeField] private TargetEvent onTargetEvent;
-    private Ray groundRay;
-    
+    [SerializeField] private Vector3GameEvent onTargetEvent;
 
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if(!Physics.Raycast(groundRay, out RaycastHit hit, Mathf.Infinity, entityLayer))
+            Ray groundRay = mainCamera.ScreenPointToRay(Input.mousePosition);
+            if (!Physics.Raycast(groundRay, out RaycastHit hit, Mathf.Infinity, entityLayer))
             {
-            targetPosition = CalculateGroundPoint();
+                targetPosition = CalculateGroundPoint();
+                RaiseTarget(targetPosition); // Raise the event after calculating the target position
             }
         }
-
     }
 
     private Vector3 CalculateGroundPoint()
@@ -35,9 +33,12 @@ public class MovementManager : MonoBehaviour
 
         return Vector3.zero;
     }
-     private void RaiseTarget(Vector3 target )
-    {
-        onTargetEvent.Raise(target); // Raise the trigger move event
-    }
 
+    private void RaiseTarget(Vector3 target)
+    {
+        if (onTargetEvent != null)
+        {
+            onTargetEvent.Raise(target); // Raise the trigger move event
+        }
+    }
 }

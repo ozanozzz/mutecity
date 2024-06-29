@@ -9,6 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 124e3ff747db796458c31a6d8d0cf825, type: 3}
-  m_Name: OnTriggerMoveObjectEvent
+  m_Script: {fileID: 11500000, guid: 0c4e951a6d0af384da43404a0b234421, type: 3}
+  m_Name: BroadcastTargetClick
   m_EditorClassIdentifier: 

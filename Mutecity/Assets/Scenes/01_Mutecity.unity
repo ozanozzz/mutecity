@@ -278,17 +278,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 717511100}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6b8549153236a6449d6d012b3cde29a, type: 3}
+  m_Script: {fileID: 11500000, guid: 585efebdb971a2d4fabf5ab8a9c5eec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 095148369fcab534493c2d40df13a5d0, type: 2}
+  Event: {fileID: 11400000, guid: e20291d2260646b4c8a85cfb7ecc9445, type: 2}
   Response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11500000, guid: c5fa8d4e8584a1f43bd1ec699fca424b, type: 3}
-        m_TargetAssemblyTypeName: UnityEngine.Object, UnityEngine
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 717511107}
+        m_TargetAssemblyTypeName: ObjectMover, Assembly-CSharp
+        m_MethodName: MoveObject
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -309,6 +309,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e02fb470884632d4bba0948144b7ade4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCamera: {fileID: 1687258584}
+  entityLayer:
+    serializedVersion: 2
+    m_Bits: 64
   highlightMaterial: {fileID: 2100000, guid: 7c30e250fa057764fba796985eb3904f, type: 2}
 --- !u!114 &717511107
 MonoBehaviour:
@@ -323,55 +327,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   step: 1
---- !u!1 &973489068
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 973489070}
-  - component: {fileID: 973489069}
-  m_Layer: 0
-  m_Name: SelectionManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &973489069
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 973489068}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 807c759f17883ad44887d881a4e03725, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainCamera: {fileID: 1687258584}
-  entityLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  onSelectEvent: {fileID: 11400000, guid: a178724be6fad8a4f877fe4b8b939018, type: 2}
-  onDeselectEvent: {fileID: 11400000, guid: c979b55c434ec444996ccea2645f6960, type: 2}
---- !u!4 &973489070
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 973489068}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.524378, y: -20.352846, z: 21.743011}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1655089645
 GameObject:
   m_ObjectHideFlags: 0
@@ -402,9 +357,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 1687258584}
-  selectedObject: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
-  onTargetEvent: {fileID: 11400000, guid: 095148369fcab534493c2d40df13a5d0, type: 2}
+  onTargetEvent: {fileID: 11400000, guid: e20291d2260646b4c8a85cfb7ecc9445, type: 2}
 --- !u!4 &1655089647
 Transform:
   m_ObjectHideFlags: 0
@@ -417,7 +371,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1687258581
 GameObject:
